@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BATAS PINTAR</title>
+  <link rel="icon" sizes="32x32" href="assets/logo-kota-yogyakarta.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/logo-kota-yogyakarta.png">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="title-section">
+      <img src="assets/logo-kota-yogyakarta.png" alt="Logo Kota Yogyakarta" class="logo-kota">
+      <h1>BATAS PINTAR</h1>
+      <p>Peta Batas Wilayah Interaktif Kota Yogyakarta</p>
+    </div>
+
+    <div class="filter-bar">
+      <select id="filterKelurahan"><option value="">Kelurahan</option></select>
+      <select id="filterKampung"><option value="">Kampung</option></select>
+      <select id="filterRW"><option value="">RW</option></select>
+      <select id="filterRT"><option value="">RT</option></select>
+      <button id="resetButton" class="btn-reset">Reset</button>
+    </div>
+  </header>
+
+  <main class="dashboard-layout">
+
+  <!-- KIRI -->
+  <section class="card side-info">
+    <h2 class="section-title">
+      <i class="fas fa-map-marker-alt"></i> Informasi Wilayah
+    </h2>
+
+    <div id="infoBox">
+      <div class="info-row"><span class="info-label">Kelurahan</span><span class="info-sep">:</span><span class="info-value" id="infoKelurahan">-</span></div>
+      <div class="info-row"><span class="info-label">Kampung</span><span class="info-sep">:</span><span class="info-value" id="infoKampung">-</span></div>
+      <div class="info-row"><span class="info-label">Kecamatan</span><span class="info-sep">:</span><span class="info-value" id="infoKecamatan">-</span></div>
+      <div class="info-row"><span class="info-label">RW</span><span class="info-sep">:</span><span class="info-value" id="infoRW">-</span></div>
+      <div class="info-row"><span class="info-label">RT</span><span class="info-sep">:</span><span class="info-value" id="infoRT">-</span></div>
+    </div>
+
+    <hr>
+
+    <h3 class="section-title">
+      <i class="fas fa-mosque"></i> Data Keagamaan
+    </h3>
+    <div class="agama-grid" id="agamaGrid">
+      <div class="agama-box"><span class="angka">0</span><p>Islam</p></div>
+      <div class="agama-box"><span class="angka">0</span><p>Kristen</p></div>
+      <div class="agama-box"><span class="angka">0</span><p>Katholik</p></div>
+      <div class="agama-box"><span class="angka">0</span><p>Hindu</p></div>
+      <div class="agama-box"><span class="angka">0</span><p>Budha</p></div>
+      <div class="agama-box"><span class="angka">0</span><p>Lainnya</p></div>
+    </div>
+
+    <div class="disabilitas-box">
+      <h3 class="section-title-dis">
+        <i class="fas fa-wheelchair"></i> Data Penyandang Disabilitas
+      </h3>
+      <span id="infoDisabilitas" class="angka-disabilitas">0</span>
+    </div>
+
+    <!-- KOLOM GOLONGAN DARAH -->
+    <div class="card darah-box">
+      <h3 class="section-title">
+        <i class="fas fa-tint"></i> Golongan Darah
+      </h3>
+      <canvas id="chartDarah"></canvas>
+    </div>
+  </section>
+
+  <!-- TENGAH -->
+  <section class="card map-section">
+    <div id="map"></div>
+
+    <div class="card pajak-panel">
+      <h3 class="section-title">
+        <i class="fas fa-coins"></i> Data Perpajakan
+      </h3>
+      <p><strong>Jumlah Objek Pajak:</strong> <span id="infoObjekPajak">0</span></p>
+      <canvas id="chartPajak"></canvas>
+    </div>
+  </section>
+
+  <!-- KANAN -->
+  <section class="right-panel">
+    <div class="card chart-card">
+      <h3 class="section-title">
+        <i class="fas fa-users"></i> Data Penduduk
+      </h3>
+      <canvas id="chartPenduduk"></canvas>
+    </div>
+
+    <div class="card chart-card">
+      <h3 class="section-title">
+        <i class="fas fa-graduation-cap"></i> Data Pendidikan
+      </h3>
+      <canvas id="chartPendidikan"></canvas>
+    </div>
+
+    <!-- === TABEL INFORMASI LENGKAP === -->
+    <div class="card info-table">
+      <table id="detailTable">
+        <thead>
+          <tr><th>Informasi Data Lengkap</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  </main>
+
+
+  <footer class="footer">
+    <p>© 2025 Pemerintah Kota Yogyakarta | Dinas Pertanahan dan Tata Ruang</p>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- App JS -->
+  <script src="app.js"></script>
+</body>
+</html>
