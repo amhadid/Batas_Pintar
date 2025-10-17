@@ -31,6 +31,78 @@
 .map-section .section-title i { font-size: 17px; }
 .right-panel .section-title i { font-size: 18px; }
 
+/* === POPUP STYLE === */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.4s ease;
+}
+
+.popup-content {
+  background: #ffffff;
+  border-radius: 16px;
+  max-width: 540px;
+  width: 90%;
+  padding: 30px 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  text-align: justify;
+  font-family: "Poppins", sans-serif;
+  color: #212121;
+  animation: slideUp 0.5s ease;
+}
+
+.popup-title {
+  text-align: center;
+  font-size: 22px;
+  color: #0d47a1;
+  margin-bottom: 14px;
+}
+
+.popup-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.popup-btn {
+  background-color: #0d47a1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  transition: background 0.3s;
+}
+
+.popup-btn:hover {
+  background-color: #1565c0;
+}
+
+/* Animasi */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 /* === Header Utama (Top Bar) === */
 .topbar {
   display: flex;
@@ -585,5 +657,15 @@ h3.section-title-dis {
 
   .section-title {
     font-size: 15px;
+  }
+
+  .popup-content {
+    padding: 24px 18px;
+  }
+  .popup-title {
+    font-size: 20px;
+  }
+  .popup-desc {
+    font-size: 14px;
   }
 }
