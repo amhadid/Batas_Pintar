@@ -445,3 +445,22 @@ fetch(geoUrl)
     console.error('Gagal memuat GeoJSON/WFS:', err);
     alert('Gagal memuat data WFS.\nDetail: ' + err.message);
   });
+
+  // === POPUP WELCOME ===
+window.addEventListener('load', function() {
+  const popup = document.getElementById('popupInfo');
+  const btnClose = document.getElementById('popupCloseBtn');
+
+  // Cek apakah popup sudah pernah ditutup sebelumnya (pakai localStorage)
+  const hasSeenPopup = localStorage.getItem('popupSeen');
+
+  if (!hasSeenPopup) {
+    popup.style.display = 'flex';
+  }
+
+  btnClose.addEventListener('click', () => {
+    popup.style.display = 'none';
+    // Simpan status agar popup tidak muncul lagi saat reload
+    localStorage.setItem('popupSeen', 'true');
+  });
+});
