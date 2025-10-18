@@ -9,8 +9,8 @@ function prop(p, ...keys) {
 
 // === Inisialisasi Peta ===
 const map = L.map('map').setView([-7.8014, 110.373], 15);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap contributors'
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: '© Esri World Imagery'
 }).addTo(map);
 
 let selectedLayer = null;
@@ -464,3 +464,4 @@ window.addEventListener('load', function() {
     localStorage.setItem('popupSeen', 'true');
   });
 });
+
