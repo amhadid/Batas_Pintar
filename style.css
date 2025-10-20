@@ -439,7 +439,7 @@ h3.section-title-dis {
 .info-table {
   margin-top: 12px;
   padding: 8px;
-  height: 100px;
+  height: 130px;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
@@ -669,3 +669,4 @@ h3.section-title-dis {
     font-size: 14px;
   }
 }
+
