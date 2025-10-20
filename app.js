@@ -629,11 +629,13 @@ fetch(geoUrl)
     allFeatures.forEach(f => {
       const rt = f.properties?.rt;
       if (!rt) return;
+
       const center = L.geoJSON(f).getBounds().getCenter();
+
       L.marker(center, {
         icon: L.divIcon({
           className: "rt-label",
-          html: `<div style="font-size:9px;font-weight:bold;color:#0d47a1;text-shadow:0 0 2px #fff;">${rt}</div>`
+          html: `<div class="rt-label-box">${rt}</div>`
         }),
         interactive: false
       }).addTo(map);
@@ -680,4 +682,5 @@ fetch(geoUrl)
     console.error("Gagal memuat GeoJSON/WFS:", err);
     alert("Gagal memuat data WFS.\nDetail: " + err.message);
   });
+
 
