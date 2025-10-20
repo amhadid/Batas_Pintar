@@ -368,6 +368,20 @@ h3.section-title-dis {
   line-height: 1;
 }
 
+.rt-label-box {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(13, 71, 161, 0.4);
+  border-radius: 4px;
+  color: #0d47a1;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 3px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.15);
+  display: inline-block;
+  min-width: 18px;
+  text-align: center;
+}
+
 .legend {
   background: rgba(255, 255, 255, 0.95);
   padding: 8px 10px;
@@ -722,4 +736,5 @@ h3.section-title-dis {
     font-size: 14px;
   }
 }
+
 
