@@ -606,11 +606,11 @@ fetch(geoUrl)
 
     // === Layer Control ===
     const overlayMaps = {
-      "Batas RT": layerRT,
-      "Batas RW": layerRW,
-      "Batas Kampung": layerKampung,
+      "Batas Kemantren": layerKemantren,
       "Batas Kelurahan": layerKelurahan,
-      "Batas Kemantren": layerKemantren
+      "Batas Kampung": layerKampung,
+      "Batas RW": layerRW,
+      "Batas RT": layerRT,
     };
     const layerControl = L.control.layers(null, overlayMaps, {
       collapsed: false,
@@ -680,3 +680,4 @@ fetch(geoUrl)
     console.error("Gagal memuat GeoJSON/WFS:", err);
     alert("Gagal memuat data WFS.\nDetail: " + err.message);
   });
+
