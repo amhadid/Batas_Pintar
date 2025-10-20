@@ -9,6 +9,7 @@
 
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
   <!-- Custom CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
@@ -127,15 +128,18 @@
       <canvas id="chartPendidikan"></canvas>
     </div>
 
-    <!-- === TABEL INFORMASI LENGKAP === -->
-    <div class="card info-table">
-      <table id="detailTable">
-        <thead>
-          <tr><th>Informasi Data Lengkap</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+  <!-- === TABEL INFORMASI LENGKAP === -->
+  <div class="card detail-card">
+  <div id="detailPlaceholder" class="detail-placeholder">
+    <p>Informasi Lengkap Terkait RT</p>
+  </div>
+
+  <div class="detail-table-container" id="detailTableContainer" style="display:none;">
+    <table id="detailTable">
+      <tbody></tbody>
+    </table>
+  </div>
+  </div>
   </section>
 
   </main>
@@ -148,6 +152,7 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- App JS -->
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
