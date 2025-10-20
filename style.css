@@ -237,7 +237,7 @@ body {
 /* GRID */
 .dashboard-layout {
   display: grid;
-  grid-template-columns: 320px 1.8fr 1.2fr;
+  grid-template-columns: 320px 2fr 1fr;
   gap: 16px;
   padding: 16px 24px;
   flex: 1;
@@ -722,3 +722,4 @@ h3.section-title-dis {
     font-size: 14px;
   }
 }
+
