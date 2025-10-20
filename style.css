@@ -356,7 +356,7 @@ h3.section-title-dis {
 }
 #map {
   width: 100%;
-  height: 420px;
+  height: 480px;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -447,7 +447,7 @@ h3.section-title-dis {
 .pajak-panel {
   padding: 14px;
 }
-#chartPajak { width:100% !important; height:220px !important; }
+#chartPajak { width:100% !important; height:180px !important; }
 
 /* KANAN */
 .right-panel {
@@ -736,5 +736,6 @@ h3.section-title-dis {
     font-size: 14px;
   }
 }
+
 
 
