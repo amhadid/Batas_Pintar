@@ -27,7 +27,7 @@ window.addEventListener('load', function() {
 });
 
 // === Inisialisasi Peta ===
-const map = L.map('map').setView([-7.8014, 110.373], 16);
+const map = L.map('map').setView([-7.8014, 110.373], 15);
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
   attribution: '© Esri World Imagery'
 }).addTo(map);
@@ -682,6 +682,7 @@ fetch(geoUrl)
     console.error("Gagal memuat GeoJSON/WFS:", err);
     alert("Gagal memuat data WFS.\nDetail: " + err.message);
   });
+
 
 
 
