@@ -74,21 +74,28 @@ function initCharts() {
   chartPenduduk = new Chart(ctx1, {
     type: 'bar',
     data: {
-      labels: ['Penduduk','KK','Laki-laki','Perempuan'],
+      labels: ['Penduduk', 'KK', 'Laki-laki', 'Perempuan'],
       datasets: [{
         label: 'Jumlah',
         data: [0, 0, 0, 0],
-        backgroundColor: ['#90caf9', '#64b5f6', '#42a5f5', '#1e88e5']
+        backgroundColor: ['#4DD0E1', '#26C6DA', '#00ACC1', '#00838F'],
+        borderColor: '#0d47a1',
+        borderWidth: 1
       }]
     },
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: { left: 10, right: 10, top: 10, bottom: 10 }
+      },
       plugins: {
         legend: {
           display: true,
           position: 'bottom',
           labels: {
-            color: '#080807',
-            font: { size: 11 },
+            color: '#00838F', // ✅ warna label
+            font: { size: 10 },
             generateLabels: (chart) => {
               const colors = chart.data.datasets[0].backgroundColor;
               const labels = chart.data.labels;
@@ -102,7 +109,17 @@ function initCharts() {
           }
         }
       },
-      scales: { y: { beginAtZero: true } }
+      scales: {
+        x: {
+          grid: { color: '#00838F' }, // ✅ garis sumbu X
+          ticks: { color: '#00838F', font: { size: 11 } }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { color: '#00838F' }, // ✅ garis sumbu Y 
+          ticks: { color: '#00838F', font: { size: 11 } }
+        }
+      }
     }
   });
 
@@ -114,7 +131,7 @@ function initCharts() {
       labels: ['A', 'B', 'AB', 'O', 'Lainnya'],
       datasets: [{
         data: [0, 0, 0, 0, 0],
-        backgroundColor: ['#90caf9', '#64b5f6', '#42a5f5', '#1e88e5', '#045eadff'],
+        backgroundColor: ['#4DD0E1', '#26C6DA', '#00ACC1', '#00838F', '#01575fff'],
         borderColor: '#fff',
         borderWidth: 2
       }]
@@ -152,7 +169,7 @@ function initCharts() {
         const xCenter = (left + right) / 2;
         const yCenter = (top + bottom) / 2;
         ctx.font = 'bold 20px Poppins';
-        ctx.fillStyle = '#0d47a1';
+        ctx.fillStyle = '#00838F';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(total, xCenter, yCenter);
@@ -166,21 +183,28 @@ function initCharts() {
   chartPendidikan = new Chart(ctx2, {
     type: 'bar',
     data: {
-      labels: ['SD','SMP','SMA','S1-S3'],
+      labels: ['SD', 'SMP', 'SMA', 'S1-S3'],
       datasets: [{
         label: 'Jumlah',
         data: [0, 0, 0, 0],
-        backgroundColor: ['#90caf9', '#64b5f6', '#42a5f5', '#1e88e5']
+        backgroundColor: ['#4DD0E1', '#26C6DA', '#00ACC1', '#00838F'],
+        borderColor: '#0d47a1',
+        borderWidth: 1
       }]
     },
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: { left: 10, right: 10, top: 10, bottom: 10 }
+      },
       plugins: {
         legend: {
           display: true,
           position: 'bottom',
           labels: {
-            color: '#080807',
-            font: { size: 11 },
+            color: '#00838F',
+            font: { size: 10 },
             generateLabels: (chart) => {
               const colors = chart.data.datasets[0].backgroundColor;
               const labels = chart.data.labels;
@@ -194,7 +218,17 @@ function initCharts() {
           }
         }
       },
-      scales: { y: { beginAtZero: true } }
+      scales: {
+        x: {
+          grid: { color: '#00838F' },
+          ticks: { color: '#00838F', font: { size: 11 } }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { color: '#00838F' },
+          ticks: { color: '#00838F', font: { size: 11 } }
+        }
+      }
     }
   });
 
@@ -207,7 +241,7 @@ function initCharts() {
       datasets: [{
         label: 'Jumlah Objek Pajak',
         data: [0, 0, 0, 0],
-        backgroundColor: ['#90caf9', '#64b5f6', '#42a5f5', '#1e88e5'],
+        backgroundColor: ['#4DD0E1', '#26C6DA', '#00ACC1', '#00838F'],
         borderColor: '#ffffff',
         borderWidth: 1.2,
         barThickness: 'flex',
@@ -245,7 +279,7 @@ function initCharts() {
             color: '#0d47a1',
             font: { size: 14, family: 'Poppins', weight: '500' },
             generateLabels: (chart) => {
-              const colors = ['#90caf9', '#64b5f6', '#42a5f5', '#1e88e5'];
+              const colors = ['#4DD0E1', '#26C6DA', '#00ACC1', '#00838F'];
               const labels = ['1–50', '51–100', '101–300', '>300'];
               return labels.map((text, i) => ({
                 text,
@@ -682,7 +716,3 @@ fetch(geoUrl)
     console.error("Gagal memuat GeoJSON/WFS:", err);
     alert("Gagal memuat data WFS.\nDetail: " + err.message);
   });
-
-
-
-
