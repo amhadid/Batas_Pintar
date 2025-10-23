@@ -53,6 +53,7 @@ body {
   font-size: 15px;
   line-height: 1.6;
   margin-bottom: 24px;
+  color: #00838F;
 }
 
 .popup-btn {
@@ -732,3 +733,4 @@ body {
     overflow-x: auto;
   }
 }
+
