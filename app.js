@@ -331,7 +331,7 @@ function updateChartsFromProps(p) {
 
   chartPendidikan.data.datasets[0].data = [
     prop(p,'tamat_sd'),
-    prop(p,'tamat_slp','tamat_smp'),
+    prop(p,'tamat_sltp','tamat_smp'),
     prop(p,'tamat_sma'),
     prop(p,'tamat_sarj','tamat_sarjana')
   ];
@@ -716,3 +716,4 @@ fetch(geoUrl)
     console.error("Gagal memuat GeoJSON/WFS:", err);
     alert("Gagal memuat data WFS.\nDetail: " + err.message);
   });
+
