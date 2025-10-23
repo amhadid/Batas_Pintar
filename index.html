@@ -4,44 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BATAS PINTAR</title>
+
+  <!-- === ICON & FAVICON === -->
   <link rel="icon" sizes="32x32" href="assets/logo-kota-yogyakarta.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/logo-kota-yogyakarta.png">
 
-  <!-- Leaflet -->
+  <!-- === LIBRARY CSS === -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-  <!-- Chart.js -->
+
+  <!-- === CUSTOM STYLE === -->
+  <link rel="preload" href="style.css" as="style">
+  <link rel="stylesheet" href="style.css" media="all">
+
+  <!-- === LIBRARY JS === -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
 </head>
 
-<!-- === POPUP DESKRIPSI DASHBOARD === -->
-<div id="popupInfo" class="popup-overlay">
-  <div class="popup-content">
-    <h2 class="popup-title">Selamat Datang di BATAS PINTAR</h2>
-    <p class="popup-desc">
-      Peta ini menampilkan batas wilayah <strong>Rukun Tetangga (RT)</strong> 
-      yang dilengkapi dengan integrasi data spasial dan statistik mencakup 
-      kependudukan, pendidikan, kesehatan, keagamaan, dan perpajakan. 
-      Informasi tersebut memberikan gambaran komprehensif mengenai kondisi sosial-ekonomi 
-      masyarakat di setiap RT serta dapat digunakan sebagai dasar analisis 
-      dan perencanaan pembangunan berbasis wilayah.
-    </p>
-
-    <button id="popupCloseBtn" class="popup-btn">
-      <i class="fa fa-thumbs-up"></i> Saya Mengerti
-    </button>
-  </div>
-</div>
-
 <body>
+
+  <!-- === POPUP DESKRIPSI DASHBOARD === -->
+  <div id="popupInfo" class="popup-overlay">
+    <div class="popup-content">
+      <h2 class="popup-title">Selamat Datang di BATAS PINTAR</h2>
+      <p class="popup-desc">
+        Peta ini menampilkan batas wilayah <strong>Rukun Tetangga (RT)</strong>
+        yang dilengkapi dengan integrasi data spasial dan statistik mencakup kependudukan, pendidikan, kesehatan,
+        keagamaan, dan perpajakan. Informasi tersebut memberikan gambaran komprehensif mengenai kondisi sosial-ekonomi
+        masyarakat di setiap RT serta dapat digunakan sebagai dasar analisis dan perencanaan pembangunan berbasis wilayah.
+      </p>
+      <button id="popupCloseBtn" class="popup-btn">
+        <i class="fa fa-thumbs-up"></i> Saya Mengerti
+      </button>
+    </div>
+  </div>
+
+  <!-- === HEADER / TOP BAR === -->
   <header class="topbar">
     <div class="title-section">
       <img src="assets/logo-kota-yogyakarta.png" alt="Logo Kota Yogyakarta" class="logo-kota">
-      <h1>BATAS PINTAR</h1>
-      <p>Peta Batas Wilayah Interaktif Kota Yogyakarta</p>
+      <div class="title-text">
+        <h1>BATAS PINTAR</h1>
+        <p>Peta Batas Wilayah Interaktif Kota Yogyakarta</p>
+      </div>
     </div>
 
     <div class="filter-bar">
@@ -49,110 +55,103 @@
       <select id="filterKampung"><option value="">Kampung</option></select>
       <select id="filterRW"><option value="">RW</option></select>
       <select id="filterRT"><option value="">RT</option></select>
-      <button id="resetButton" class="btn-reset">Reset</button>
+      <button id="resetButton" class="btn-reset">
+        <i class="fa-solid fa-rotate-right"></i> Reset
+      </button>
     </div>
   </header>
 
+  <!-- === MAIN CONTENT GRID === -->
   <main class="dashboard-layout">
 
-  <!-- KIRI -->
-  <section class="card side-info">
-    <h2 class="section-title">
-      <i class="fas fa-map-marker-alt"></i> Informasi Wilayah
-    </h2>
+    <!-- === KIRI: INFORMASI WILAYAH === -->
+    <section class="card side-info">
+      <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Informasi Wilayah</h2>
 
-    <div id="infoBox">
-      <div class="info-row"><span class="info-label">Kelurahan</span><span class="info-sep">:</span><span class="info-value" id="infoKelurahan">-</span></div>
-      <div class="info-row"><span class="info-label">Kampung</span><span class="info-sep">:</span><span class="info-value" id="infoKampung">-</span></div>
-      <div class="info-row"><span class="info-label">Kecamatan</span><span class="info-sep">:</span><span class="info-value" id="infoKecamatan">-</span></div>
-      <div class="info-row"><span class="info-label">RW</span><span class="info-sep">:</span><span class="info-value" id="infoRW">-</span></div>
-      <div class="info-row"><span class="info-label">RT</span><span class="info-sep">:</span><span class="info-value" id="infoRT">-</span></div>
-    </div>
+      <div id="infoBox">
+        <div class="info-row"><span class="info-label">Kelurahan</span><span class="info-sep">:</span><span class="info-value" id="infoKelurahan">-</span></div>
+        <div class="info-row"><span class="info-label">Kampung</span><span class="info-sep">:</span><span class="info-value" id="infoKampung">-</span></div>
+        <div class="info-row"><span class="info-label">Kecamatan</span><span class="info-sep">:</span><span class="info-value" id="infoKecamatan">-</span></div>
+        <div class="info-row"><span class="info-label">RW</span><span class="info-sep">:</span><span class="info-value" id="infoRW">-</span></div>
+        <div class="info-row"><span class="info-label">RT</span><span class="info-sep">:</span><span class="info-value" id="infoRT">-</span></div>
+      </div>
 
-    <hr>
+      <hr>
 
-    <h3 class="section-title">
-      <i class="fas fa-mosque"></i> Data Keagamaan
-    </h3>
-    <div class="agama-grid" id="agamaGrid">
-      <div class="agama-box"><span class="angka">0</span><p>Islam</p></div>
-      <div class="agama-box"><span class="angka">0</span><p>Kristen</p></div>
-      <div class="agama-box"><span class="angka">0</span><p>Katholik</p></div>
-      <div class="agama-box"><span class="angka">0</span><p>Hindu</p></div>
-      <div class="agama-box"><span class="angka">0</span><p>Budha</p></div>
-      <div class="agama-box"><span class="angka">0</span><p>Lainnya</p></div>
-    </div>
+      <h3 class="section-title"><i class="fas fa-mosque"></i> Data Keagamaan</h3>
+      <div class="agama-grid" id="agamaGrid">
+        <div class="agama-box"><span class="angka">0</span><p>Islam</p></div>
+        <div class="agama-box"><span class="angka">0</span><p>Kristen</p></div>
+        <div class="agama-box"><span class="angka">0</span><p>Katholik</p></div>
+        <div class="agama-box"><span class="angka">0</span><p>Hindu</p></div>
+        <div class="agama-box"><span class="angka">0</span><p>Budha</p></div>
+        <div class="agama-box"><span class="angka">0</span><p>Lainnya</p></div>
+      </div>
 
-    <div class="disabilitas-box">
-      <h3 class="section-title-dis">
-        <i class="fas fa-wheelchair"></i> Data Penyandang Disabilitas
-      </h3>
-      <span id="infoDisabilitas" class="angka-disabilitas">0</span>
-    </div>
+      <div class="disabilitas-box">
+        <h3 class="section-title-dis"><i class="fas fa-wheelchair"></i> Data Penyandang Disabilitas</h3>
+        <span id="infoDisabilitas" class="angka-disabilitas">0</span>
+      </div>
 
-    <!-- KOLOM GOLONGAN DARAH -->
-    <div class="card darah-box">
-      <h3 class="section-title">
-        <i class="fas fa-tint"></i> Golongan Darah
-      </h3>
-      <canvas id="chartDarah"></canvas>
-    </div>
-  </section>
+      <div class="card darah-box">
+        <h3 class="section-title"><i class="fas fa-tint"></i> Golongan Darah</h3>
+        <canvas id="chartDarah"></canvas>
+      </div>
+    </section>
 
-  <!-- TENGAH -->
-  <section class="card map-section">
-    <div id="map"></div>
+    <!-- === TENGAH: PETA DAN DATA PAJAK === -->
+    <section class="map-wrapper">
+      <!-- CARD PETA -->
+      <div class="card map-section">
+        <div id="map"></div>
+      </div>
 
-    <div class="card pajak-panel">
-      <h3 class="section-title">
-        <i class="fas fa-coins"></i> Data Perpajakan
-      </h3>
-      <p><strong>Jumlah Objek Pajak:</strong> <span id="infoObjekPajak">0</span></p>
-      <canvas id="chartPajak"></canvas>
-    </div>
-  </section>
+      <!-- CARD PERPAJAKAN -->
+      <div class="card pajak-section">
+        <h3 class="section-title">
+          <i class="fas fa-coins"></i> Data Perpajakan
+        </h3>
+        <p><strong>Jumlah Objek Pajak:</strong> <span id="infoObjekPajak">0</span></p>
+        <canvas id="chartPajak"></canvas>
+      </div>
+    </section>
 
-  <!-- KANAN -->
-  <section class="right-panel">
-    <div class="card chart-card">
-      <h3 class="section-title">
-        <i class="fas fa-users"></i> Data Penduduk
-      </h3>
-      <canvas id="chartPenduduk"></canvas>
-    </div>
+    <!-- === KANAN: CHART & DETAIL === -->
+    <section class="right-panel">
 
-    <div class="card chart-card">
-      <h3 class="section-title">
-        <i class="fas fa-graduation-cap"></i> Data Pendidikan
-      </h3>
-      <canvas id="chartPendidikan"></canvas>
-    </div>
+      <div class="card chart-card">
+        <h3 class="section-title"><i class="fas fa-users"></i> Data Penduduk</h3>
+        <canvas id="chartPenduduk"></canvas>
+      </div>
 
-  <!-- === TABEL INFORMASI LENGKAP === -->
-  <div class="card detail-card">
-  <div id="detailPlaceholder" class="detail-placeholder">
-    <p>Informasi Lengkap Terkait RT</p>
-  </div>
+      <div class="card chart-card">
+        <h3 class="section-title"><i class="fas fa-graduation-cap"></i> Data Pendidikan</h3>
+        <canvas id="chartPendidikan"></canvas>
+      </div>
 
-  <div class="detail-table-container" id="detailTableContainer" style="display:none;">
-    <table id="detailTable">
-      <tbody></tbody>
-    </table>
-  </div>
-  </div>
-  </section>
+      <!-- === DETAIL INFORMASI === -->
+      <div class="card detail-card">
+        <div id="detailPlaceholder" class="detail-placeholder">
+          <p>Informasi Lengkap Terkait RT</p>
+        </div>
+        <div class="detail-table-container" id="detailTableContainer" style="display:none;">
+          <table id="detailTable"><tbody></tbody></table>
+        </div>
+      </div>
 
+    </section>
   </main>
 
-
+  <!-- === FOOTER === -->
   <footer class="footer">
     <p>© 2025 Pemerintah Kota Yogyakarta | Dinas Pertanahan dan Tata Ruang</p>
   </footer>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- App JS -->
-  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
-  <script src="app.js"></script>
+  <!-- === JAVASCRIPT LIBRARIES === -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js" defer></script>
+
+  <!-- === CUSTOM SCRIPT === -->
+  <script src="app.js" defer></script>
 </body>
 </html>
