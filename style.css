@@ -1,37 +1,19 @@
-:root {
-  --primary: #0d47a1;
-  --accent: #1976d2;
-  --bg: #f9fafb;
-  --card-bg: #ffffff;
-  --text-main: #1e293b;
-  --text-muted: #6b7280;
-  --radius: 12px;
-  --shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-/* === Judul Kolom dengan Ikon === */
-.section-title {
+/* ==========================================================
+   🌐 GLOBAL & DASAR
+   ========================================================== */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #E0F7FA;
+  margin: 0;
+  color: #1e293b;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 12px;
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.section-title i {
-  font-size: 18px;
-}
-
-/* Spesifik untuk ukuran ikon berbeda */
-.side-info .section-title i { font-size: 16px; }
-.map-section .section-title i { font-size: 17px; }
-.right-panel .section-title i { font-size: 18px; }
-
-/* === POPUP STYLE === */
+/* ==========================================================
+   💬 POPUP WELCOME
+   ========================================================== */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -48,7 +30,7 @@
 }
 
 .popup-content {
-  background: #ffffff;
+  background: #E0F7FA;
   border-radius: 16px;
   max-width: 540px;
   width: 90%;
@@ -63,7 +45,7 @@
 .popup-title {
   text-align: center;
   font-size: 22px;
-  color: #0d47a1;
+  color: #00ACC1;
   margin-bottom: 14px;
 }
 
@@ -74,8 +56,8 @@
 }
 
 .popup-btn {
-  background-color: #0d47a1;
-  color: #fff;
+  background-color: #00ACC1;
+  color: #E0F7FA;
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
@@ -92,29 +74,22 @@
   background-color: #1565c0;
 }
 
-/* Animasi */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-@keyframes slideUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-/* === Header Utama === */
+/* ==========================================================
+   🧭 HEADER UTAMA
+   ========================================================== */
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #00ACC1;
   padding: 12px 20px;
   border-bottom: 2px solid #e0e0e0;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-/* === Bagian kiri: logo + judul === */
 .title-section {
   display: flex;
   align-items: center;
@@ -131,21 +106,23 @@
 .title-section h1 {
   font-size: 26px;
   font-weight: 800;
-  color: #0d47a1;
+  color: #F9FAFB;
   margin: 0;
   line-height: 1.1;
   letter-spacing: 0.8px;
 }
 
 .title-section p {
-  font-size: 16px;
-  color: #080807;
+  font-size: 18px;
+  color: #F9FAFB;
   margin: 0;
   line-height: 1.2;
   font-weight: 500;
 }
 
-/* === Filter Bar === */
+/* ==========================================================
+   🔽 FILTER BAR
+   ========================================================== */
 .filter-bar {
   display: flex;
   align-items: center;
@@ -156,118 +133,98 @@
 .filter-bar select {
   padding: 6px 8px;
   border-radius: 4px;
-  border: 1px solid #b0bec5;
-  background-color: #fafafa;
+  border: 1px solid #fff;
+  background-color: #00838F;
   font-size: 14px;
-  color: #37474f;
+  color: #fff;
 }
 
-.filter-bar .btn-reset {
-  background-color: #0d47a1;
+.btn-reset {
+  background-color: #00838F;
   color: #fff;
-  border: none;
+  border: 1px solid #fff;
   padding: 6px 14px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
-}
-
-.filter-bar .btn-reset:hover {
-  background-color: #1565c0;
-}
-
-h2.section-title {
-  text-align: center;
-}
-
-h3.section-title {
-  color: #0d47a1 !important;
-  font-weight: 700;
-  text-align: center;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  margin: 0;
-  color: var(--text-main);
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-/* HEADER */
-.topbar {
-  background: var(--card-bg);
-  box-shadow: var(--shadow);
-  padding: 12px 18px;
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
   align-items: center;
-}
-.title-section h1 {
-  font-size: 20px;
-  color: var(--primary);
-  margin: 0;
-}
-.title-section p {
-  color: var(--text-muted);
-  margin: 0;
-  font-size: 15px;
-}
-.filter-bar {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-.filter-bar select, .btn-reset {
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  background: white;
-  font-size: 13px;
-}
-.btn-reset {
-  background: var(--accent);
-  color: white;
-  border: none;
-  cursor: pointer;
+  gap: 6px;
+  transition: background 0.3s;
 }
 
-/* GRID */
+.btn-reset i {
+  font-size: 14px;
+}
+
+/* ==========================================================
+   🧱 GRID DASHBOARD
+   ========================================================== */
 .dashboard-layout {
   display: grid;
-  grid-template-columns: 320px 2fr 1fr;
+  grid-template-columns: 310px 2.5fr 1fr;
   gap: 16px;
   padding: 16px 24px;
   flex: 1;
   align-items: start;
 }
+
 .card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: #FFD54F;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   padding: 16px;
 }
 
-/* SIDE INFO (KIRI) */
+/* ==========================================================
+   📍 KOLOM KIRI (INFORMASI WILAYAH)
+   ========================================================== */
 .side-info h2 {
   font-size: 18px;
   margin-bottom: 8px;
-  color: var(--primary);
+  color: #00838F;
 }
-#infoBox p { margin: 6px 0; font-size: 14px; }
-hr { border: none; border-top: 1px solid #e5e7eb; margin: 10px 0; }
 
-/* KEAGAMAAN */
+#infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 130px 12px auto;
+  align-items: center;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #00838F;
+  white-space: nowrap;
+}
+
+.info-sep {
+  text-align: center;
+  font-weight: 500;
+  color: #00838F;
+}
+
+.info-value {
+  font-weight: 500;
+  color: #00838F;
+}
+
+/* === KEAGAMAAN === */
 .agama-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   margin-top: 6px;
 }
+
 .agama-box {
-  background: #f1f5f9;
+  background: #E0F7FA;
   border-radius: 10px;
   text-align: center;
   padding: 8px 6px;
@@ -277,67 +234,68 @@ hr { border: none; border-top: 1px solid #e5e7eb; margin: 10px 0; }
   justify-content: center;
   align-items: center;
 }
+
+.section-title,
+.section-title-dis {
+  color: #00838F !important;
+}
+
+.agama-grid ~ .section-title,
+.section-title i.fas.fa-mosque {
+  color: #00838F;
+}
+
 .agama-box .angka {
   font-size: 20px;
   font-weight: 700;
-  color: var(--accent);
+  color: #00838F;
   display: block;
 }
+
 .agama-box p {
   font-size: 11px;
-  color: var(--text-muted);
+  color: #00838F;
   margin: 0;
 }
 
-/* DISABILITAS */
+/* === DISABILITAS === */
 .disabilitas-box {
-  background: #e3f2fd;
+  background: #E0F7FA;
   border-radius: 8px;
   text-align: center;
   padding: 10px;
   margin-top: 10px;
 }
-.disabilitas-box p {
-  margin: 0;
-  font-size: 13px;
-  color: var(--primary);
-  font-weight: 600;
-}
-.angka-disabilitas {
-  display: block;
-  font-size: 22px;
-  font-weight: bold;
-  color: #0d47a1;
-  margin-top: 6px;
+
+.section-title-dis,
+.section-title-dis i {
+  color: #00838F;
 }
 
-h3.section-title-dis {
-  color: #0d47a1 !important;
-  font-weight: 300;
-  text-align: center;
+.angka-disabilitas {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  color: #00838F;
+  margin-top: 6px;
 }
 
 /* === GOLONGAN DARAH === */
 .darah-box {
-  background: #f9fafb;
+  background: #E0F7FA;
   border-radius: 10px;
   margin-top: 10px;
   padding: 10px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.darah-box h3 {
-  font-size: 18px;
-  margin-bottom: 6px;
-  color: var(--primary);
-  text-align: center;
-}
-.darah-box canvas {
-  width: 100% !important;
-  height: 180px !important;
+
+.darah-box .section-title,
+.darah-box .section-title i {
+  color: #00838F;
 }
 
 #chartDarah {
@@ -347,32 +305,36 @@ h3.section-title-dis {
   max-height: 100%;
 }
 
-/* MAP & PAJAK (TENGAH) */
-.map-section {
+/* ==========================================================
+   🗺️ KOLOM TENGAH (PETA + PAJAK)
+   ========================================================== */
+.map-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 0;
+  gap: 14px;
 }
+
+/* === CARD MAP === */
+.map-section {
+  background: #FFD54F;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  padding: 0;
+  overflow: hidden;
+}
+
 #map {
   width: 100%;
-  height: 480px;
+  height: 510px;
   border-radius: 12px;
   overflow: hidden;
 }
 
-.rt-label {
-  pointer-events: none;
-  text-align: center;
-  white-space: nowrap;
-  line-height: 1;
-}
-
 .rt-label-box {
-  background: rgba(255, 255, 255, 0.85);
+  background: #E0F7FA;
   border: 1px solid rgba(13, 71, 161, 0.4);
   border-radius: 4px;
-  color: #0d47a1;
+  color: #00838F;
   font-size: 9px;
   font-weight: 700;
   padding: 1px 3px;
@@ -382,8 +344,9 @@ h3.section-title-dis {
   text-align: center;
 }
 
+/* === LEGENDA PETA === */
 .legend {
-  background: rgba(255, 255, 255, 0.95);
+  background: #E0F7FA;
   padding: 8px 10px;
   border-radius: 8px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
@@ -392,9 +355,10 @@ h3.section-title-dis {
 }
 
 .legend h4 {
-  color: #0d47a1;
+  color: #00838F !important;
   font-weight: 600;
   margin-bottom: 4px;
+  font-size: 13px;
 }
 
 .legend-item {
@@ -412,131 +376,155 @@ h3.section-title-dis {
   border: 1px solid #ccc;
 }
 
-/* === Scrollbar Global === */
-.legend-scroll,
-#detailTableContainer {
-  scrollbar-width: thin;
-  scrollbar-color: #0d47a1 #e3f2fd;
+.legend {
+  color: #00838F !important;
+  font-weight: 500;
+  font-size: 13px;
 }
 
-/* Untuk Webkit-based browser (Chrome, Edge, Safari) */
-.legend-scroll::-webkit-scrollbar,
-#detailTableContainer::-webkit-scrollbar {
+.legend-item span {
+  color: #00838F !important;
+}
+
+/* Browser modern (Chrome, Edge, Safari) */
+#detailTableContainer::-webkit-scrollbar,
+.legend::-webkit-scrollbar,
+.leaflet-control-layers-list::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-.legend-scroll::-webkit-scrollbar-track,
-#detailTableContainer::-webkit-scrollbar-track {
-  background: #e3f2fd;
+#detailTableContainer::-webkit-scrollbar-track,
+.legend::-webkit-scrollbar-track,
+.leaflet-control-layers-list::-webkit-scrollbar-track {
+  background: #E0F7FA;  /* warna dasar track */
   border-radius: 8px;
 }
 
-.legend-scroll::-webkit-scrollbar-thumb,
-#detailTableContainer::-webkit-scrollbar-thumb {
-  background-color: #0d47a1;
+#detailTableContainer::-webkit-scrollbar-thumb,
+.legend::-webkit-scrollbar-thumb,
+.leaflet-control-layers-list::-webkit-scrollbar-thumb {
+  background-color: #00838F; /* warna utama */
   border-radius: 8px;
-  border: 1px solid #bbdefb;
+  border: 1px solid #00ACC1; /* garis luar */
 }
 
-.legend-scroll::-webkit-scrollbar-thumb:hover,
-#detailTableContainer::-webkit-scrollbar-thumb:hover {
-  background-color: #1565c0;
+#detailTableContainer::-webkit-scrollbar-thumb:hover,
+.legend::-webkit-scrollbar-thumb:hover,
+.leaflet-control-layers-list::-webkit-scrollbar-thumb:hover {
+  background-color: #006064; /* warna saat hover */
 }
 
-.pajak-panel {
+/* Firefox (scrollbar-color property) */
+#detailTableContainer,
+.legend,
+.leaflet-control-layers-list {
+  scrollbar-width: thin;
+  scrollbar-color: #00838F #E0F7FA; /* thumb, track */
+}
+
+/* === LAYER CONTROL === */
+.leaflet-control-layers {
+  background-color: #E0F7FA !important;
+  border: 1px solid #00ACC1;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.leaflet-control-layers-expanded {
+  background-color: #E0F7FA !important;
+}
+
+.leaflet-control-layers label,
+.leaflet-control-layers span {
+  color: #00838F !important;
+  font-weight: 400;
+}
+
+.leaflet-control-layers-selector {
+  accent-color: #00838F !important; /* Browser modern mendukung accent-color */
+}
+
+/* === ZOOM CONTROL === */
+.leaflet-control-zoom {
+  background-color: #E0F7FA !important;
+  border-radius: 8px;
+  border: 1px solid #00838F;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.leaflet-control-zoom a {
+  background-color: #E0F7FA !important;
+  color: #00838F !important;
+  border: none;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #B2EBF2 !important;
+  color: #004D40 !important;
+}
+
+/* === PANEL PAJAK === */
+.pajak-section {
+  background: #FFE082;
+  border-radius: 12px;
   padding: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
-#chartPajak { width:100% !important; height:180px !important; }
 
-/* KANAN */
+#chartPajak {
+  width: 100% !important;
+  height: 200px !important;
+}
+
+.chart-card .section-title,
+.chart-card .section-title i,
+.pajak-section .section-title,
+.pajak-section .section-title i {
+  color: #00838F;
+}
+
+.pajak-section p {
+  font-weight: 600;
+  color: #00838F; /* warna teks utama */
+}
+
+.pajak-section p strong,
+#infoObjekPajak {
+  color: #00838F; /* warna label dan nilai */
+  font-weight: 700;
+}
+
+/* ==========================================================
+   📊 KOLOM KANAN (CHART & DETAIL)
+   ========================================================== */
 .right-panel {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-.chart-card canvas {
-  width: 100% !important;
-  height: 220px !important;
-}
 
-/* === LEGENDA PETA === */
-.legend {
-  background: white;
-  padding: 10px 12px;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-  font-size: 13px;
-  line-height: 18px;
-  color: #333;
-}
-.legend h4 {
-  margin: 0 0 6px 0;
-  font-size: 14px;
-  color: #0d47a1;
-}
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-.legend-color {
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-}
-
-/* === Tampilan informasi wilayah agar tanda : sejajar === */
-#infoBox {
+.chart-card {
+  background: #FFD54F;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin: 10px 0;
-  font-size: 15px;
-}
-
-.info-row {
-  display: grid;
-  grid-template-columns: 110px 10px auto;
-  align-items: center;
-}
-
-.info-label {
-  font-weight: 600;
-  color: #212121;
-}
-
-.info-sep {
-  text-align: center;
-  font-weight: 600;
-  color: #212121;
-}
-
-.info-value {
-  color: #212121;
-  font-weight: 500;
-}
-
-/* === TABEL INFORMASI LENGKAP === */
-.detail-placeholder {
-  height: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
-  color: #0d47a1;
-  font-weight: 600;
-  text-align: center;
-  padding: 20px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 15px;
-  transition: opacity 0.4s ease;
 }
 
+.chart-card canvas {
+  width: 100% !important;
+  height: 223px !important;
+  max-width: 100%;
+}
+
+/* === TABEL DETAIL === */
 .detail-card {
-  height: 145px;
-  background: #fff;
+  height: 178px;
+  background: #FFD54F;
   border-radius: 12px;
   padding: 8px 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
@@ -545,197 +533,202 @@ h3.section-title-dis {
   overflow: hidden;
 }
 
+.detail-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00838F;
+  font-weight: 600;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+}
+
 .detail-table-container {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 220px;
-  scrollbar-width: thin;
-  scrollbar-color: #0d47a1 #f1f1f1;
-}
-
-.detail-table-container::-webkit-scrollbar {
-  width: 6px;
-}
-.detail-table-container::-webkit-scrollbar-thumb {
-  background-color: #0d47a1;
-  border-radius: 10px;
-}
-.detail-table-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
 }
 
 #detailTable {
   width: 100%;
   border-collapse: collapse;
 }
+
 #detailTable td {
   padding: 4px 8px;
   font-size: 13px;
   border-bottom: 1px solid #eee;
 }
+
 #detailTable tr:last-child td {
   border-bottom: none;
 }
 
-/* FOOTER */
-.footer {
-  text-align: center;
-  padding: 10px;
-  font-size: 12px;
-  color: var(--text-muted);
-  border-top: 1px solid #e5e7eb;
+#detailTableContainer table td {
+  color: #00838F; /* warna default */
+  padding: 4px 8px;
+  transition: color 0.3s ease;
 }
 
-/* === RESPONSIVE DESIGN === */
+#detailTableContainer::-webkit-scrollbar,
+.leaflet-control-layers::-webkit-scrollbar,
+.leaflet-legend::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
-/* Tablet (lebar ≤ 1024px) */
+#detailTableContainer::-webkit-scrollbar-track,
+.leaflet-control-layers::-webkit-scrollbar-track,
+.leaflet-legend::-webkit-scrollbar-track {
+  background: #E0F7FA; /* warna dasar track */
+  border-radius: 8px;
+}
+
+#detailTableContainer::-webkit-scrollbar-thumb,
+.leaflet-control-layers::-webkit-scrollbar-thumb,
+.leaflet-legend::-webkit-scrollbar-thumb {
+  background-color: #00838F; /* warna utama scrollbar */
+  border-radius: 8px;
+  border: 1px solid #00ACC1;
+}
+
+#detailTableContainer::-webkit-scrollbar-thumb:hover,
+.leaflet-control-layers::-webkit-scrollbar-thumb:hover,
+.leaflet-legend::-webkit-scrollbar-thumb:hover {
+  background-color: #006064; /* sedikit lebih gelap saat hover */
+}
+
+/* Untuk Firefox */
+#detailTableContainer,
+.leaflet-control-layers,
+.leaflet-legend {
+  scrollbar-width: thin;
+  scrollbar-color: #00838F #E0F7FA;
+}
+
+/* ==========================================================
+   🧩 FOOTER
+   ========================================================== */
+.footer {
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+  color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  background: #00ACC1;
+}
+
+/* ==========================================================
+   📱 RESPONSIVE DESIGN
+   ========================================================== */
+/* 🖥️ Laptop & Tablet Landscape (max-width: 1024px) */
 @media (max-width: 1024px) {
   .dashboard-layout {
-    grid-template-columns: 260px 1fr;   /* dua kolom: kiri dan tengah */
-    grid-template-areas:
-      "side map"
-      "side right";
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 12px;
+    padding: 10px;
   }
 
   #map {
-    height: 350px;
+    height: 360px;
+    border-radius: 10px;
   }
 
-  .chart-card canvas,
-  #chartPajak,
-  #chartDarah {
-    height: 200px !important;
-  }
-
-  .filter-bar {
-    justify-content: center;
-  }
-
-  .title-section h1 {
-    font-size: 22px;
+  .chart-card,
+  .pajak-section,
+  .side-info {
+    padding: 10px;
   }
 }
 
-/* Ponsel (lebar ≤ 768px) */
+/* 💻 Tablet & Small Laptop (max-width: 768px) */
 @media (max-width: 768px) {
   body {
     height: auto;
+    overflow-x: hidden;
   }
 
   .topbar {
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     text-align: center;
-    justify-content: center;
-  }
-
-  .title-section {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .filter-bar {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .filter-bar select,
-  .filter-bar .btn-reset {
-    width: 48%;
-    font-size: 13px;
+    padding: 8px 0;
   }
 
   .dashboard-layout {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    padding: 10px;
-  }
-
-  .side-info,
-  .map-section,
-  .right-panel {
-    width: 100%;
-  }
-
-  #map {
-    height: 300px;
-  }
-
-  .card {
+    gap: 16px;
     padding: 12px;
   }
 
-  /* Kecilkan teks agar proporsional */
-  .section-title {
-    font-size: 16px;
-  }
-  .agama-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .agama-box .angka {
-    font-size: 18px;
-  }
-  .agama-box p {
-    font-size: 10px;
+  .side-info,
+  .pajak-section,
+  .chart-card,
+  .detail-card {
+    width: 100%;
+    border-radius: 12px;
   }
 
-  /* Golongan darah chart */
-  #chartDarah {
-    width: 180px !important;
-    height: 180px !important;
+  #map {
+    height: 320px;
+    width: 100%;
+    border-radius: 12px;
   }
 
-  /* Tabel tetap bisa discroll dan tidak melebar */
-  .info-table {
-    height: auto;
-    max-height: 300px;
+  .filter-bar {
+    flex-direction: column;
+    gap: 8px;
   }
-  #detailTable {
-    font-size: 12px;
-  }
-  #detailTable tbody {
-    max-height: 240px;
-  }
-}
 
-/* Ponsel sangat kecil (≤ 480px) */
-@media (max-width: 480px) {
   .filter-bar select,
   .filter-bar .btn-reset {
     width: 100%;
   }
+}
 
-  .title-section h1 {
-    font-size: 20px;
+/* 📱 Mobile Phones (max-width: 480px) */
+@media (max-width: 480px) {
+  body {
+    padding: 0 6px;
   }
-  .title-section p {
-    font-size: 13px;
+
+  .topbar {
+    gap: 8px;
+    padding: 6px 0;
+  }
+
+  .dashboard-layout {
+    gap: 10px;
+  }
+
+  .side-info,
+  .pajak-section,
+  .chart-card,
+  .detail-card {
+    padding: 8px;
+    font-size: 0.9rem;
   }
 
   #map {
     height: 260px;
+    border-radius: 10px;
   }
 
-  .section-title {
-    font-size: 15px;
+  .filter-bar select,
+  .filter-bar .btn-reset {
+    width: 100%;
+    font-size: 0.9rem;
   }
 
-  .popup-content {
-    padding: 24px 18px;
-  }
-  .popup-title {
-    font-size: 20px;
-  }
-  .popup-desc {
-    font-size: 14px;
+  /* Agar tabel tetap terbaca */
+  #detailTableContainer {
+    overflow-x: auto;
   }
 }
-
-
-
