@@ -1,4 +1,4 @@
-/* ==========================================================
+ /* ==========================================================
    🌐 GLOBAL & DASAR
    ========================================================== */
 body {
@@ -425,25 +425,76 @@ body {
 }
 
 /* === LAYER CONTROL === */
-.leaflet-control-layers {
-  background-color: #E0F7FA !important;
+.layer-control-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+/* === Tombol Icon Toggle === */
+.layer-toggle-icon {
+  background: #E0F7FA;
+  color: #00838F;
+  font-size: 18px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.layer-toggle-icon:hover {
+  background: #B2EBF2;
+  transform: scale(1.05);
+}
+
+/* === Isi Layer Control === */
+.layer-control-inner {
+  background: #E0F7FA;
   border: 1px solid #00ACC1;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  max-height: 340px;
+  overflow-y: auto;
 }
 
-.leaflet-control-layers-expanded {
-  background-color: #E0F7FA !important;
+/* === Checkbox Styling === */
+.layer-control-inner input[type="checkbox"] {
+  accent-color: #00838F;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }
 
-.leaflet-control-layers label,
-.leaflet-control-layers span {
-  color: #00838F !important;
-  font-weight: 400;
+/* === Label Text di Layer Control === */
+.layer-control-inner label {
+  color: #00838F;
+  font-weight: 500;
+  font-size: 13px;
+  user-select: none;
 }
 
-.leaflet-control-layers-selector {
-  accent-color: #00838F !important; /* Browser modern mendukung accent-color */
+/* === LABEL BATAS ADMINISTRASI === */
+.boundary-label-box {
+  display: inline-block;
+  background: rgba(224, 247, 250, 0.9);
+  color: #004D40;
+  border: 1px solid #00ACC1;
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
 }
 
 /* === ZOOM CONTROL === */
@@ -562,7 +613,7 @@ body {
 #detailTable td {
   padding: 4px 8px;
   font-size: 13px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #00838F;
 }
 
 #detailTable tr:last-child td {
@@ -624,30 +675,26 @@ body {
 }
 
 /* ==========================================================
-   📱 RESPONSIVE DESIGN
+   📱 RESPONSIVE DESIGN - TAMPILAN DINAMIS WEBGIS
    ========================================================== */
-/* 🖥️ Laptop & Tablet Landscape (max-width: 1024px) */
+
+/* 💻 Laptop kecil / layar menengah */
 @media (max-width: 1024px) {
   .dashboard-layout {
     display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 12px;
+    grid-template-columns: 260px 1fr;
+    gap: 14px;
     padding: 10px;
   }
-
   #map {
-    height: 360px;
-    border-radius: 10px;
+    height: 380px;
   }
-
-  .chart-card,
-  .pajak-section,
-  .side-info {
-    padding: 10px;
+  .chart-container {
+    height: 250px;
   }
 }
 
-/* 💻 Tablet & Small Laptop (max-width: 768px) */
+/* 📱 Tablet (horizontal & vertikal) */
 @media (max-width: 768px) {
   body {
     height: auto;
@@ -659,7 +706,7 @@ body {
     align-items: center;
     gap: 10px;
     text-align: center;
-    padding: 8px 0;
+    justify-content: center;
   }
 
   .dashboard-layout {
@@ -669,21 +716,45 @@ body {
     padding: 12px;
   }
 
-  .side-info,
-  .pajak-section,
-  .chart-card,
-  .detail-card {
-    width: 100%;
-    border-radius: 12px;
-  }
-
   #map {
-    height: 320px;
     width: 100%;
+    height: 340px;
+    order: 1;
     border-radius: 12px;
   }
 
-  .filter-bar {
+  .chart-container {
+    height: 220px;
+    width: 100%;
+  }
+
+  .chart-card, 
+  .data-card, 
+  #detailTableContainer {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .info-panel, 
+  .side-panel {
+    width: 100%;
+  }
+
+  /* Atur tabel informasi agar bisa discroll horizontal */
+  #detailTableContainer {
+    overflow-x: auto;
+    max-height: 280px;
+  }
+
+  /* Jarak antar elemen dashboard */
+  .data-section {
+    margin-bottom: 12px;
+  }
+}
+
+/* 📱 Smartphone kecil */
+@media (max-width: 480px) {
+  .topbar {
     flex-direction: column;
     gap: 8px;
   }
@@ -692,45 +763,32 @@ body {
   .filter-bar .btn-reset {
     width: 100%;
   }
-}
 
-/* 📱 Mobile Phones (max-width: 480px) */
-@media (max-width: 480px) {
-  body {
-    padding: 0 6px;
+  #map {
+    height: 280px;
   }
 
-  .topbar {
-    gap: 8px;
-    padding: 6px 0;
+  .chart-container {
+    height: 200px;
+  }
+
+  #detailTableContainer {
+    max-height: 240px;
+  }
+
+  .legend,
+  .leaflet-control-layers {
+    font-size: 11px;
+    max-width: 85%;
   }
 
   .dashboard-layout {
+    padding: 8px;
     gap: 10px;
   }
 
-  .side-info,
-  .pajak-section,
-  .chart-card,
-  .detail-card {
-    padding: 8px;
-    font-size: 0.9rem;
-  }
-
-  #map {
-    height: 260px;
-    border-radius: 10px;
-  }
-
-  .filter-bar select,
-  .filter-bar .btn-reset {
-    width: 100%;
-    font-size: 0.9rem;
-  }
-
-  /* Agar tabel tetap terbaca */
-  #detailTableContainer {
-    overflow-x: auto;
+  .card {
+    padding: 10px;
+    border-radius: 12px;
   }
 }
-
