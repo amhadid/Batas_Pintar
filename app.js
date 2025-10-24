@@ -56,7 +56,7 @@ function styleFeature(feature) {
     color: "#ffffff",
     weight: 1,
     fillColor: getColorByKelurahan(kel),
-    fillOpacity: 0.7
+    fillOpacity: 0.5
   };
 }
 
@@ -774,3 +774,4 @@ fetch(geoUrl)
     console.error("Gagal memuat GeoJSON/WFS:", err);
     alert("Gagal memuat data WFS.\nDetail: " + err.message);
 });
+
