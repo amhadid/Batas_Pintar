@@ -69,6 +69,7 @@ function highlightStyle() {
 let chartPenduduk, chartPendidikan, chartDarah, chartPajak;
 
 function initCharts() {
+
   // === DATA PENDUDUK ===
   const ctx1 = document.getElementById('chartPenduduk').getContext('2d');
   chartPenduduk = new Chart(ctx1, {
@@ -86,15 +87,13 @@ function initCharts() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      layout: {
-        padding: { left: 10, right: 10, top: 10, bottom: 10 }
-      },
+      layout: { padding: { left: 10, right: 10, top: 10, bottom: 10 } },
       plugins: {
         legend: {
           display: true,
           position: 'bottom',
           labels: {
-            color: '#00838F', // ✅ warna label
+            color: '#00838F',
             font: { size: 10 },
             generateLabels: (chart) => {
               const colors = chart.data.datasets[0].backgroundColor;
@@ -111,12 +110,12 @@ function initCharts() {
       },
       scales: {
         x: {
-          grid: { color: '#00838F' }, // ✅ garis sumbu X
+          grid: { color: '#00838F33' },
           ticks: { color: '#00838F', font: { size: 11 } }
         },
         y: {
           beginAtZero: true,
-          grid: { color: '#00838F' }, // ✅ garis sumbu Y 
+          grid: { color: '#00838F33' },
           ticks: { color: '#00838F', font: { size: 11 } }
         }
       }
@@ -131,7 +130,7 @@ function initCharts() {
       labels: ['A', 'B', 'AB', 'O', 'Lainnya'],
       datasets: [{
         data: [0, 0, 0, 0, 0],
-        backgroundColor: ['#4DD0E1', '#26C6DA', '#00ACC1', '#00838F', '#01575fff'],
+        backgroundColor: ['#4DD0E1', '#26C6DA', '#00ACC1', '#00838F', '#01575F'],
         borderColor: '#fff',
         borderWidth: 2
       }]
@@ -178,7 +177,7 @@ function initCharts() {
     }]
   });
 
-  // === PENDIDIKAN ===
+  // === DATA PENDIDIKAN ===
   const ctx2 = document.getElementById('chartPendidikan').getContext('2d');
   chartPendidikan = new Chart(ctx2, {
     type: 'bar',
@@ -195,9 +194,7 @@ function initCharts() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      layout: {
-        padding: { left: 10, right: 10, top: 10, bottom: 10 }
-      },
+      layout: { padding: { left: 10, right: 10, top: 10, bottom: 10 } },
       plugins: {
         legend: {
           display: true,
@@ -220,19 +217,19 @@ function initCharts() {
       },
       scales: {
         x: {
-          grid: { color: '#00838F' },
+          grid: { color: '#00838F33' },
           ticks: { color: '#00838F', font: { size: 11 } }
         },
         y: {
           beginAtZero: true,
-          grid: { color: '#00838F' },
+          grid: { color: '#00838F33' },
           ticks: { color: '#00838F', font: { size: 11 } }
         }
       }
     }
   });
 
-  // === PERPAJAKAN ===
+  // === DATA PERPAJAKAN ===
   const ctx4 = document.getElementById('chartPajak').getContext('2d');
   chartPajak = new Chart(ctx4, {
     type: 'bar',
@@ -252,18 +249,16 @@ function initCharts() {
       responsive: true,
       maintainAspectRatio: false,
       indexAxis: 'y',
-      layout: {
-        padding: { top: 10, bottom: 10, left: 10, right: 10 }
-      },
+      layout: { padding: { top: 10, bottom: 10, left: 10, right: 10 } },
       scales: {
         x: {
           beginAtZero: true,
           ticks: { color: '#00838F', font: { size: 12, family: 'Poppins' } },
-          grid: { color: '#00838F', lineWidth: 0.5 }
+          grid: { color: '#00838F33', lineWidth: 0.5 }
         },
         y: {
-          ticks: { color: '#333', font: { size: 13, weight: '600', family: 'Poppins' } },
-          grid: { display: false }
+          ticks: { color: '#00838F', font: { size: 13, weight: '600', family: 'Poppins' } },
+          grid: { color: '#00838F33', lineWidth: 0.3 }
         }
       },
       plugins: {
@@ -842,3 +837,4 @@ fetch(geoUrl)
     console.error("Gagal memuat GeoJSON/WFS:", err);
     alert("Gagal memuat data WFS.\nDetail: " + err.message);
   });
+
