@@ -148,7 +148,7 @@ function initCharts() {
             boxWidth: 20,
             boxHeight: 20,
             padding: 10,
-            color: '#080807',
+            color: '#00838F',
             font: { size: 14 }
           }
         },
@@ -258,8 +258,8 @@ function initCharts() {
       scales: {
         x: {
           beginAtZero: true,
-          ticks: { color: '#333', font: { size: 12, family: 'Poppins' } },
-          grid: { color: '#e0e0e0', lineWidth: 0.5 }
+          ticks: { color: '#00838F', font: { size: 12, family: 'Poppins' } },
+          grid: { color: '#00838F', lineWidth: 0.5 }
         },
         y: {
           ticks: { color: '#333', font: { size: 13, weight: '600', family: 'Poppins' } },
@@ -276,7 +276,7 @@ function initCharts() {
             boxWidth: 25,
             boxHeight: 15,
             padding: 10,
-            color: '#0d47a1',
+            color: '#00838F',
             font: { size: 14, family: 'Poppins', weight: '500' },
             generateLabels: (chart) => {
               const colors = ['#4DD0E1', '#26C6DA', '#00ACC1', '#00838F'];
@@ -617,7 +617,7 @@ fetch(geoUrl)
     const layerRW = L.geoJSON(toLine(rwMerged), {
       style: { color: "#fb8c00", weight: 1.3, dashArray: "3,2" },
       interactive: false
-    }).addTo(map); // default aktif
+    });
     layerRW.setZIndex(5);
 
     const layerKampung = L.geoJSON(toLine(kampungMerged), {
@@ -638,6 +638,118 @@ fetch(geoUrl)
     });
     layerKemantren.setZIndex(2);
 
+    // === LABEL OTOMATIS UNTUK SETIAP BATAS ===
+
+    // Buat LayerGroup untuk label
+    const labelRT = L.layerGroup();
+    const labelRW = L.layerGroup();
+    const labelKampung = L.layerGroup();
+    const labelKelurahan = L.layerGroup();
+    const labelKemantren = L.layerGroup();
+
+    // Fungsi pembuat label di tengah polygon
+    function createLabels(layerSource, labelGroup, keyName) {
+      labelGroup.clearLayers();
+      layerSource.eachLayer(l => {
+        try {
+          const bounds = l.getBounds();
+          const center = bounds.getCenter();
+          const text = l.feature?.properties?.[keyName];
+          if (!text) return;
+
+          const lbl = L.marker(center, {
+            icon: L.divIcon({
+              className: "boundary-label",
+              html: `<div class="boundary-label-box">${text}</div>`,
+            }),
+            interactive: false
+          });
+          labelGroup.addLayer(lbl);
+        } catch (e) {
+          console.warn("Label error:", e);
+        }
+      });
+    }
+
+    // Buat label awal
+    createLabels(layerRT, labelRT, "rt");
+    createLabels(layerRW, labelRW, "rw");
+    createLabels(layerKampung, labelKampung, "kampung");
+    createLabels(layerKelurahan, labelKelurahan, "kelurahan");
+    createLabels(layerKemantren, labelKemantren, "kecamatan");
+
+    // === Tambahkan otomatis label saat layer aktif ===
+    map.on("overlayadd", e => {
+      switch (e.name) {
+        case "Batas RT":
+          createLabels(layerRT, labelRT, "rt");
+          labelRT.addTo(map);
+          break;
+        case "Batas RW":
+          createLabels(layerRW, labelRW, "rw");
+          labelRW.addTo(map);
+          break;
+        case "Batas Kampung":
+          createLabels(layerKampung, labelKampung, "kampung");
+          labelKampung.addTo(map);
+          break;
+        case "Batas Kelurahan":
+          createLabels(layerKelurahan, labelKelurahan, "kelurahan");
+          labelKelurahan.addTo(map);
+          break;
+        case "Batas Kemantren":
+          createLabels(layerKemantren, labelKemantren, "kecamatan");
+          labelKemantren.addTo(map);
+          break;
+      }
+    });
+
+    // === Hapus label saat layer dimatikan ===
+    map.on("overlayremove", e => {
+      switch (e.name) {
+        case "Batas RT": map.removeLayer(labelRT); break;
+        case "Batas RW": map.removeLayer(labelRW); break;
+        case "Batas Kampung": map.removeLayer(labelKampung); break;
+        case "Batas Kelurahan": map.removeLayer(labelKelurahan); break;
+        case "Batas Kemantren": map.removeLayer(labelKemantren); break;
+      }
+    });
+
+    // === AKTIFKAN OTOMATIS BATAS RT & LABEL RT SAAT AWAL ===
+    map.whenReady(() => {
+      // Tambahkan layer Batas RT ke peta
+      if (!map.hasLayer(layerRT)) {
+        layerRT.addTo(map);
+      }
+
+      // Buat label RT dan tampilkan
+      createLabels(layerRT, labelRT, "rt");
+      labelRT.addTo(map);
+
+      // Update status checkbox "Batas RT" di layer control agar terlihat aktif
+      setTimeout(() => {
+        document.querySelectorAll(".leaflet-control-layers-selector").forEach(el => {
+          const lbl = el.nextSibling?.textContent?.trim();
+          if (lbl === "Batas RT") el.checked = true;
+        });
+      }, 300);
+    });
+
+    // === Perbesar / perkecil teks label sesuai zoom level ===
+    map.on("zoomend", () => {
+      const z = map.getZoom();
+      let size;
+      if (z <= 14) size = 8;
+      else if (z === 15) size = 10;
+      else if (z === 16) size = 11;
+      else if (z >= 17) size = 13;
+
+      document.querySelectorAll(".boundary-label-box").forEach(el => {
+        el.style.fontSize = `${size}px`;
+        el.style.padding = `${Math.max(1, (size - 7) / 3)}px 4px`;
+      });
+    });
+
     // === Layer Control ===
     const overlayMaps = {
       "Batas Kemantren": layerKemantren,
@@ -646,33 +758,47 @@ fetch(geoUrl)
       "Batas RW": layerRW,
       "Batas RT": layerRT,
     };
+
     const layerControl = L.control.layers(null, overlayMaps, {
       collapsed: false,
       position: "topright"
     }).addTo(map);
 
-    // === Pastikan layer RT tetap klik-able walau layer lain aktif ===
-    map.on('overlayadd', e => {
+    // Setelah layerControl dibuat, pindahkan ke dalam wrapper custom
+    setTimeout(() => {
+      const mapContainer = map.getContainer();
+
+      // Buat wrapper dan icon
+      const wrapper = document.createElement('div');
+      wrapper.className = 'layer-control-wrapper';
+
+      const toggleIcon = document.createElement('div');
+      toggleIcon.className = 'layer-toggle-icon';
+      toggleIcon.innerHTML = '🗺️';
+      wrapper.appendChild(toggleIcon);
+
+      // Ambil elemen bawaan Leaflet
+      const controlContainer = layerControl.getContainer();
+      controlContainer.classList.add('layer-control-inner');
+
+      // Pindahkan ke dalam wrapper
+      wrapper.appendChild(controlContainer);
+      mapContainer.appendChild(wrapper);
+
+      // Event hover: tampilkan / sembunyikan control
+      wrapper.addEventListener('mouseenter', () => {
+        controlContainer.style.display = 'block';
+      });
+      wrapper.addEventListener('mouseleave', () => {
+        controlContainer.style.display = 'none';
+      });
+
+      controlContainer.style.display = 'none';
+    }, 200);
+
+    // Pastikan layer RT tetap klik-able di atas layer lain
+    map.on('overlayadd overlayremove', () => {
       layerRT.bringToFront();
-    });
-    map.on('overlayremove', e => {
-      layerRT.bringToFront();
-    });
-
-    // === Label RT ===
-    allFeatures.forEach(f => {
-      const rt = f.properties?.rt;
-      if (!rt) return;
-
-      const center = L.geoJSON(f).getBounds().getCenter();
-
-      L.marker(center, {
-        icon: L.divIcon({
-          className: "rt-label",
-          html: `<div class="rt-label-box">${rt}</div>`
-        }),
-        interactive: false
-      }).addTo(map);
     });
 
     // === Legenda Peta ===
@@ -716,4 +842,3 @@ fetch(geoUrl)
     console.error("Gagal memuat GeoJSON/WFS:", err);
     alert("Gagal memuat data WFS.\nDetail: " + err.message);
   });
-
