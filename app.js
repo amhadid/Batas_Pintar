@@ -837,4 +837,3 @@ fetch(geoUrl)
     console.error("Gagal memuat GeoJSON/WFS:", err);
     alert("Gagal memuat data WFS.\nDetail: " + err.message);
   });
-
