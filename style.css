@@ -360,6 +360,7 @@ body {
   font-weight: 600;
   margin-bottom: 4px;
   font-size: 13px;
+  margin-top: 0;
 }
 
 .legend-item {
@@ -792,3 +793,4 @@ body {
     border-radius: 12px;
   }
 }
+
