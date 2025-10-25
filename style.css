@@ -751,6 +751,7 @@ body {
 
   #map {
     height: 360px;
+    width: 100%;
     order: 1;
   }
 
@@ -807,6 +808,7 @@ body {
 
   #map {
     height: 280px;
+    width: 100%;
   }
 
   .chart-card canvas {
@@ -841,3 +843,4 @@ body {
     font-size: 13px;
   }
 }
+
